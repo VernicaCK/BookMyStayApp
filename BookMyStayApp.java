@@ -1,21 +1,25 @@
-abstract class Room {
-    String type; int beds; double price;
-    Room(String t,int b,double p){ type=t; beds=b; price=p; }
-    abstract void show();
-}
-
-class Single extends Room { Single(){ super("Single",1,50); } void show(){ System.out.println(type+" - Beds:"+beds+", $"+price); } }
-class DoubleRoom extends Room { DoubleRoom(){ super("Double",2,90); } void show(){ System.out.println(type+" - Beds:"+beds+", $"+price); } }
-class Suite extends Room { Suite(){ super("Suite",3,150); } void show(){ System.out.println(type+" - Beds:"+beds+", $"+price); } }
+import java.util.HashMap;
 
 public class BookMyStayApp {
-    public static void main(String[] args){
-        Room[] rooms = { new Single(), new DoubleRoom(), new Suite() };
-        int[] avail = {5,3,2};
-        System.out.println("=== BookMyStay v2.1 ===");
-        for(int i=0;i<rooms.length;i++){
-            rooms[i].show();
-            System.out.println("Available: "+avail[i]+"\n");
+    public static void main(String[] args) {
+        // Initialize inventory
+        HashMap<String,Integer> inventory = new HashMap<>();
+        inventory.put("Single", 5);
+        inventory.put("Double", 3);
+        inventory.put("Suite", 2);
+
+        // Display inventory
+        System.out.println("=== BookMyStay v3.1 ===");
+        System.out.println("Room Inventory:");
+        for(String room : inventory.keySet()) {
+            System.out.println(room + " Rooms Available: " + inventory.get(room));
+        }
+
+        // Update example
+        inventory.put("Double", 2);
+        System.out.println("\nAfter updating Double Room availability:");
+        for(String room : inventory.keySet()) {
+            System.out.println(room + " Rooms Available: " + inventory.get(room));
         }
     }
 }
